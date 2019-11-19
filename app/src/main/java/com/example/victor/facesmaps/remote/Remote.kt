@@ -1,6 +1,6 @@
 package com.example.victor.facesmaps.remote
 
-import com.example.victor.facesmaps.BASE_URL
+import com.example.victor.facesmaps.model.BASE_URL
 import com.example.victor.facesmaps.model.Page
 import io.reactivex.Observable
 import retrofit2.Retrofit
