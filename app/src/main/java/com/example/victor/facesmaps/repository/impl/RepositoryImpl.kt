@@ -17,10 +17,15 @@ object RepositoryImpl : Repository {
             users(page)
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ database.userDao().insert(it.data) },
-                { it.printStackTrace() })
+                .subscribe({ page -> page.data.forEach {
+                        it.page = page.page
+                        it.total_pages = page.total_pages
+                    }
+                    database.userDao().insert(page.data)
+                },
+                    { it.printStackTrace() })
         }
-        return database.userDao().getAll()
+        return database.userDao().getAll(page)
     }
 
     override fun getUser(id: Int): LiveData<User?> {

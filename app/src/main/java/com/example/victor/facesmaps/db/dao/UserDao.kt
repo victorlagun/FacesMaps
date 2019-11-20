@@ -9,8 +9,8 @@ import com.example.victor.facesmaps.model.User
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM user")
-    fun getAll(): LiveData<List<User>?>
+    @Query("SELECT * FROM user WHERE page = :page")
+    fun getAll(page: Int): LiveData<List<User>?>
 
     @Query("SELECT * FROM user WHERE id = :id")
     fun getById(id: Int): LiveData<User?>
