@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Faces&amp;Maps</string>
+    <string name="bottom_nav_faces">Faces</string>
+    <string name="bottom_nav_maps">Maps</string>
 </resources>
