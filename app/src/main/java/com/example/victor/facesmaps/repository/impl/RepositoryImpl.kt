@@ -6,13 +6,14 @@ import com.example.victor.facesmaps.model.User
 import com.example.victor.facesmaps.remote.Remote
 import com.example.victor.facesmaps.remote.impl.RemoteImpl
 import com.example.victor.facesmaps.repository.Repository
+import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 
 object RepositoryImpl : Repository {
     private val database = App.instance.database
     private val remote = RemoteImpl(Remote.create())
 
-    override fun getAll(page: Int): LiveData<List<User>?> {
+    override fun getAll(page: Int): Flowable<List<User>?> {
         with(remote) {
             users(page)
                 .observeOn(Schedulers.io())

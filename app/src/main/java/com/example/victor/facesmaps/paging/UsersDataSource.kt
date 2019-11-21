@@ -1,35 +1,30 @@
-package com.example.victor.facesmaps
+package com.example.victor.facesmaps.paging
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import android.annotation.SuppressLint
 import androidx.paging.PageKeyedDataSource
 import com.example.victor.facesmaps.model.User
 import com.example.victor.facesmaps.repository.impl.RepositoryImpl
 
-class UsersDataSource(private val lifecycleOwner: LifecycleOwner) :
+class UsersDataSource :
     PageKeyedDataSource<Int, User>() {
 
+    @SuppressLint("CheckResult")
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, User>) {
         val currentPage = 1
         val nextPage = currentPage + 1
 
-        RepositoryImpl.getAll(currentPage).observe(
-            lifecycleOwner, Observer {
-                callback.onResult(it as MutableList<User>, null, nextPage)
-            })
+        RepositoryImpl.getAll(currentPage).subscribe( { with(callback) { onResult(it as MutableList<User>, null, nextPage) } }, { e -> e.printStackTrace()})
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
 
     }
 
+    @SuppressLint("CheckResult")
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
         val currentPage = params.key
         val nextPage = currentPage + 1
 
-        RepositoryImpl.getAll(currentPage).observe(
-            lifecycleOwner, Observer {
-                callback.onResult(it as MutableList<User>, nextPage)
-            })
+        RepositoryImpl.getAll(currentPage).subscribe( { with(callback) { onResult(it as MutableList<User>, nextPage) } }, { e -> e.printStackTrace()})
     }
 }

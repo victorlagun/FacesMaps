@@ -1,4 +1,4 @@
-package com.example.victor.facesmaps.adapter
+package com.example.victor.facesmaps.paging
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.victor.facesmaps.R
 import com.example.victor.facesmaps.model.User
+import kotlinx.android.synthetic.main.item_users_list.view.*
 
 class UsersAdapter :
     PagedListAdapter<User, RecyclerView.ViewHolder>(UserDiffCallback) {
@@ -36,7 +38,14 @@ class UsersAdapter :
 class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(user: User?) {
-        user?.let { }
+        user?.let {
+            Glide
+                .with(itemView.context)
+                .load(user.avatar)
+                .into(itemView.imageView)
+            itemView.firstName.text = user.first_name
+            itemView.secondName.text = user.last_name
+        }
     }
 
     companion object {
