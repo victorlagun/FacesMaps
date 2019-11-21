@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/usersListFragment"
-        android:name="com.example.victor.facesmaps.view.fragment.UsersListFragment"
+        android:name="com.example.victor.facesmaps.ui.fragment.UsersListFragment"
         android:label="users_list_fragment"
         tools:layout="@layout/users_list_fragment" />
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.victor.facesmaps.view.fragment.UserFragment"
+        android:name="com.example.victor.facesmaps.ui.fragment.UserFragment"
         android:label="user_fragment"
         tools:layout="@layout/user_fragment" />
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.victor.facesmaps.view.fragment.MapsFragment"
+        android:name="com.example.victor.facesmaps.ui.fragment.MapsFragment"
         android:label="maps_fragment"
         tools:layout="@layout/maps_fragment" />
 </navigation>

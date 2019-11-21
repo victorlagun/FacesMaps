@@ -2,4 +2,6 @@
     <string name="app_name">Faces&amp;Maps</string>
     <string name="bottom_nav_faces">Faces</string>
     <string name="bottom_nav_maps">Maps</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 </resources>

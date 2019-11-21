@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.paging.PageKeyedDataSource
 import com.example.victor.facesmaps.model.User
 import com.example.victor.facesmaps.repository.impl.RepositoryImpl
+import com.example.victor.facesmaps.util.ErrorHandler
 
 class UsersDataSource :
     PageKeyedDataSource<Int, User>() {
@@ -13,7 +14,7 @@ class UsersDataSource :
         val currentPage = 1
         val nextPage = currentPage + 1
 
-        RepositoryImpl.getAll(currentPage).subscribe( { with(callback) { onResult(it as MutableList<User>, null, nextPage) } }, { e -> e.printStackTrace()})
+        RepositoryImpl.getAll(currentPage).subscribe( { with(callback) { onResult(it as MutableList<User>, null, nextPage) } }, { ErrorHandler().handleError(it) })
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
@@ -25,6 +26,6 @@ class UsersDataSource :
         val currentPage = params.key
         val nextPage = currentPage + 1
 
-        RepositoryImpl.getAll(currentPage).subscribe( { with(callback) { onResult(it as MutableList<User>, nextPage) } }, { e -> e.printStackTrace()})
+        RepositoryImpl.getAll(currentPage).subscribe( { with(callback) { onResult(it as MutableList<User>, nextPage) } }, { ErrorHandler().handleError(it) })
     }
 }

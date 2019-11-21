@@ -1,4 +1,4 @@
-package com.example.victor.facesmaps.impl
+package com.example.victor.facesmaps
 
 import android.app.Application
 import androidx.room.Room

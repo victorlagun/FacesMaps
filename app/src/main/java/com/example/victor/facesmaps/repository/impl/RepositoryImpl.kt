@@ -1,11 +1,12 @@
 package com.example.victor.facesmaps.repository.impl
 
 import androidx.lifecycle.LiveData
-import com.example.victor.facesmaps.impl.App
+import com.example.victor.facesmaps.App
 import com.example.victor.facesmaps.model.User
 import com.example.victor.facesmaps.remote.Remote
 import com.example.victor.facesmaps.remote.impl.RemoteImpl
 import com.example.victor.facesmaps.repository.Repository
+import com.example.victor.facesmaps.util.ErrorHandler
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 
@@ -24,7 +25,7 @@ object RepositoryImpl : Repository {
                     }
                     database.userDao().insert(page.data)
                 },
-                    { it.printStackTrace() })
+                    { ErrorHandler().handleError(it) })
         }
         return database.userDao().getAll(page)
     }

@@ -44,7 +44,7 @@ class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 .load(user.avatar)
                 .into(itemView.imageView)
             itemView.firstName.text = user.first_name
-            itemView.secondName.text = user.last_name
+            itemView.lastName.text = user.last_name
         }
     }
 
