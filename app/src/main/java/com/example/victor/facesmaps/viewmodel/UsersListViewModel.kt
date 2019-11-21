@@ -1,34 +1,27 @@
 package com.example.victor.facesmaps.viewmodel
 
-import androidx.arch.core.executor.ArchTaskExecutor
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.example.victor.facesmaps.App
 import com.example.victor.facesmaps.model.User
-import com.example.victor.facesmaps.paging.UsersAdapter
-import com.example.victor.facesmaps.paging.UsersDataSource
+import com.example.victor.facesmaps.paging.UserBoundaryCallback
+import java.util.concurrent.Executors
+
 
 class UsersListViewModel : ViewModel() {
 
-    private val adapter = UsersAdapter()
-    private val dataSource = UsersDataSource()
+    fun getPagedList(): LiveData<PagedList<User>> {
+            val config = PagedList.Config.Builder()
+                .setEnablePlaceholders(true)
+                .setPageSize(PAGE_SIZE)
+                .build()
 
-    fun getAdapter(): UsersAdapter {
-        adapter.submitList(getPagedList())
-        return adapter
-    }
-
-    fun getDataSource(): UsersDataSource {
-        return dataSource
-    }
-
-    private fun getPagedList(): PagedList<User> {
-        val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(true)
-            .setPageSize(PAGE_SIZE)
-            .build()
-        return PagedList.Builder<Int, User>(dataSource, config)
-            .setFetchExecutor(ArchTaskExecutor.getMainThreadExecutor())
-            .setNotifyExecutor(ArchTaskExecutor.getMainThreadExecutor()).build()
+            return LivePagedListBuilder(App.instance.database.userDao().getAll(), config)
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
+                .setBoundaryCallback(UserBoundaryCallback())
+                .build()
     }
 
     companion object {

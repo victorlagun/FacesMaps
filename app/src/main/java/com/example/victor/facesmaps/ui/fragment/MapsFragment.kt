@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.victor.facesmaps.R
 import com.example.victor.facesmaps.viewmodel.MapsViewModel
 
+
 class MapsFragment : Fragment() {
 
     companion object {

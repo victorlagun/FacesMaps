@@ -14,7 +14,7 @@ import com.example.victor.facesmaps.util.alert
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var navController: NavController
+    lateinit var navController: NavController
 
     var isNetworkAvailable = true
 

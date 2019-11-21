@@ -4,4 +4,8 @@
     <string name="bottom_nav_maps">Maps</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="name">Name:</string>
+    <string name="surname">Surname:</string>
+    <string name="emailLabel">Email:</string>
 </resources>

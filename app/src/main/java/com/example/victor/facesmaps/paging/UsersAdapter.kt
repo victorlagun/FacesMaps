@@ -1,5 +1,6 @@
 package com.example.victor.facesmaps.paging
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.victor.facesmaps.R
 import com.example.victor.facesmaps.model.User
+import com.example.victor.facesmaps.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.item_users_list.view.*
+
 
 class UsersAdapter :
     PagedListAdapter<User, RecyclerView.ViewHolder>(UserDiffCallback) {
@@ -33,12 +36,17 @@ class UsersAdapter :
             }
         }
     }
+
 }
 
-class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class UserViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    init {itemView.setOnClickListener(this)}
+
+    lateinit var user: User
 
     fun bind(user: User?) {
         user?.let {
+            this.user = user
             Glide
                 .with(itemView.context)
                 .load(user.avatar)
@@ -46,6 +54,12 @@ class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             itemView.firstName.text = user.first_name
             itemView.lastName.text = user.last_name
         }
+    }
+
+    override fun onClick(v: View?) {
+        val bundle = Bundle()
+        bundle.putInt("id", user.id)
+        (v?.context as MainActivity).navController.navigate(R.id.userFragment, bundle)
     }
 
     companion object {
